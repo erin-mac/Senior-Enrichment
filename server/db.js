@@ -1,27 +1,29 @@
 const Sequelize = require('sequelize');
 const db = new Sequelize(
     process.env.DATABASE_URL ||
-    'postgres://localhost:5432/acme-users-rank', {
+    'postgres://localhost:5432/acme-product-managers', {
         logging: false
     }
 );
 
-const User = db.define('user', {
+const Manager = db.define('manager', {
     name: {
         type: Sequelize.STRING,
-        allowNull: false
-    },
-    description: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-    rank: {
-        type: Sequelize.INTEGER,
         allowNull: false
     }
 });
 
+const Product = db.define('product', {
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
+})
+
+Product.belongsTo(Manager)
+
 module.exports = {
     db,
-    User
+    Manager,
+    Product
 }

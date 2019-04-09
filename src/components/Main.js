@@ -1,28 +1,48 @@
-import React, { Component } from 'react';
-import { Router, Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import Home from './Home'
+import React, { Component } from 'react'
+import { Route, HashRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchManagers } from '../store'
+import { fetchProducts } from '../store'
+import { checkManager } from '../store'
 import Nav from './Nav'
-import Top from './Top'
-//import { connect } from 'react-redux'
+import Managers from './Managers'
+import ProductForm from './Products'
+class Main extends Component {
 
-export class Main extends Component {
-
-    // componentDidMount() {
-    //     this.props.loadMessages()
-    // }
+    componentDidMount() {
+        this.props.getManagers()
+            .catch(ex => console.log(ex))
+        this.props.getProducts()
+            .catch(ex => console.log(ex))
+    }
 
     render() {
         return (
-            <div>
-                <h1>Acme Users With Ranks</h1>
-                <Nav />
-                <Route exact path='/' component={Home} />
-                <Route exact path='/Top' component={Top} />
-            </div>
+            <HashRouter>
+                <div>
+                    <h1> Acme Product Managers </h1>
 
-        );
+                    <Nav />
+                    <Route path="/managers" component={Managers} />
+                    <Route exact path="/products" component={ProductForm} />
+                    <Route exact path="/" render={() => <div>
+                        We {checkManager() ? " HAVE " : " DO NOT HAVE "}
+                        product manager positions open </div>} />
+
+
+
+                </div>
+            </HashRouter>
+        )
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        getManagers: () => dispatch(fetchManagers()),
+        getProducts: () => dispatch(fetchProducts())
+    }
+}
 
-export default Main
+export default connect(null, mapDispatchToProps)(Main)
+

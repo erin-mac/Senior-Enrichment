@@ -1,45 +1,35 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { fetchUsers } from '../store'
+import React from 'react'
 import { Link } from 'react-router-dom'
-//import { builtinModules } from 'module';
+import { connect } from 'react-redux'
 
-export class Nav extends Component {
-    componentDidMount() {
-        this.props.goGetUsers()
-    }
+const Nav = (props) => {
 
-    render() {
-        const topRanked = this.props.users.filter(user => user.rank === 1)
-        console.log(topRanked)
-        return (
-            <div>
-                <ul className='nav nav-tabs'>
-                    <li className='nav-item'>
-                        <Link to='/' className='nav-link'>Home</Link>
-                    </li>
-                    <li className='nav-item'>
-                        <Link to='/Users' className='nav-link'>Users ({this.props.users.length})</Link>
-                    </li>
-                    <li className='nav-item'>
-                        <Link to='/Create' className='nav-link'>New User</Link>
-                    </li>
-                    <li className='nav-item'>
-                        <Link to='/Top' className='nav-link'>Top Ranked ({topRanked.map(user => user.name)})</Link>
-                    </li>
-                </ul>
-            </div >
+    //console.log(typeof props.managers)
+    return (
 
-        );
-    }
+        <div>
+            <ul className='nav nav-tabs'>
+
+                <li className='nav-item'>
+                    <Link to='/' className='nav-link'>Home</Link>
+                </li>
+                <li className='nav-item'>
+                    <Link to='/products' className='nav-link'>Products</Link>
+                </li>
+                <li className='nav-item'>
+                    <Link to='/managers' className='nav-link'>Managers {props.managers.length ?
+                        '(' + props.managers.length + ')' : ''}</Link>
+                </li>
+
+            </ul>
+        </div>
+
+    )
 }
 
 const mapStateToProps = state => {
-    return { users: state.users }
+    return { managers: state.managers }
 }
 
-const mapDispatchToProps = dispatch => {
-    return { goGetUsers: () => dispatch(fetchUsers()) }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav)
+export default connect(mapStateToProps)(Nav)

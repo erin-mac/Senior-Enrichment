@@ -14,10 +14,9 @@ app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 // body parsing middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // 'API' routes
-app.use('/api', require('./api/users'));
+app.use('/api', require('./api/routes'));
 
 // 404 middleware
 app.use((req, res, next) =>
