@@ -5,38 +5,37 @@ import { updateManager } from '../store'
 class ProductForm extends Component {
     constructor(props) {
         super(props)
-        this.state = { products: {}, managers: {}, newManager: {} };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = { newManager: {} };
     }
 
-    handleChange(ev) {
-        this.setState({ manager: ev.target.value });
+    handleChange = (ev) => {
+        var newManager = this.props.managers.find(manager => manager.id == ev.target.value)
+        this.setState({ newManager: newManager });
     }
 
-    handleSubmit(ev) {
-        updateManager()
-        event.preventDefault();
+    handleSave = (ev) => {
+        updateManager(this.state.newManager)
+        ev.preventDefault();
     }
 
     currentManagerName = (id) => {
-        const manager = props.managers.find(manager => manager.id == id)
+        const manager = this.props.managers.find(manager => manager.id == id)
         return manager.name
     }
     render() {
+        console.log(this.props.product)
         return (
 
             <form>
                 {
-                    props.products.map(product => {
+                    this.props.products.map(product => {
                         return (
                             <div>
                                 <label> {product.name}
                                     <select>
-                                        {props.managers.map(() => {
+                                        {this.props.managers.map((manager) => {
                                             const currentManagerId = product.managerId
-                                            return (<option value="">{currentManagerId ? currentManagerName(currentManagerId) : "-- none --"}</option>)
+                                            return (<option key={manager.id} value={currentManagerId ? this.currentManagerName(currentManagerId) : "-- none --"}>{manager.name}</option>)
                                         })}
                                     </select>
                                 </label>
@@ -53,5 +52,6 @@ class ProductForm extends Component {
 const mapStateToProps = state => {
     return { products: state.products, managers: state.managers }
 }
+
 
 export default connect(mapStateToProps)(ProductForm)

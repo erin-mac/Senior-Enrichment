@@ -19,4 +19,12 @@ router.use((req, res, next) => {
     res.status(404).send('Not found');
 });
 
+router.put('/products/:id', async (req, res, next) => {
+    try {
+        const product = await Product.findByPk(req.params.id)
+        product.update({ managerId: req.body.id })
+        return await product.save()
+    } catch (error) { next(error) }
+})
+
 module.exports = router
