@@ -38,11 +38,15 @@ export const fetchCampuses = () => async dispatch => {
 
 export const addCampus = (newCampus) => async dispatch => {
     try {
-        console.log('hit route')
         const response = await axios.put('api/campuses/addCampuses', newCampus)
-        console.log('Campus added')
-        //const newCampus = response.data
         return dispatch(setCampuses(campuses))
+    } catch (error) { console.log(error) }
+}
+
+export const addStudent = (newStudent) => async dispatch => {
+    try {
+        const response = await axios.put('api/students/addStudents', newStudent)
+        return dispatch(setStudents(students))
     } catch (error) { console.log(error) }
 }
 

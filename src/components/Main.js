@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HashRouter, Route, Link } from 'react-router-dom'
+import { HashRouter, Route, Link, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchStudents, fetchCampuses } from '../store'
 import Students from './Students'
@@ -8,6 +8,8 @@ import Nav from './Nav'
 import SingleCampus from './SingleCampus'
 import SingleStudent from './SingleStudent'
 import NewCampus from './NewCampus'
+import NewStudent from './NewStudent'
+
 class Main extends Component {
 
     componentDidMount() {
@@ -22,13 +24,16 @@ class Main extends Component {
         return (
             <div>
                 <h3>Welcome!</h3>
+                <Nav />
                 <HashRouter>
-                    <Route path='/' component={Nav} />
-                    <Route exact path='/campuses' component={Campuses} />
-                    <Route exact path='/students' component={Students} />
-                    <Route exact path='/campuses/:id' component={SingleCampus} />
-                    <Route exact path='/students/:id' component={SingleStudent} />
-                    <Route exact path='/campuses/addCampus' component={NewCampus} />
+                    <Switch>
+                        <Route exact path='/campuses' component={Campuses} />
+                        <Route exact path='/students' component={Students} />
+                        <Route exact path='/campuses/addCampus' component={NewCampus} />
+                        <Route exact path='/students/addStudent' component={NewStudent} />
+                        <Route exact path='/campuses/:id' component={SingleCampus} />
+                        <Route exact path='/students/:id' component={SingleStudent} />
+                    </Switch>
                 </HashRouter>
             </div>
 

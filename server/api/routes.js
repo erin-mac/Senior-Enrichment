@@ -15,12 +15,12 @@ router.get('/campuses', async (req, res, next) => {
     } catch (error) { next(error) }
 })
 
-// router.put('/students/addStudent', async (req, res, next) => {
-//     try {
-//         const addStudent = await Students.create(req.body)
-//         res.json(addStudent)
-//     } catch (error) { next(error) }
-// })
+router.put('/students/addStudents', async (req, res, next) => {
+    try {
+        const addStudent = await Students.create(req.body)
+        res.json(addStudent)
+    } catch (error) { next(error) }
+})
 
 router.put('/campuses/addCampuses', async (req, res, next) => {
     try {

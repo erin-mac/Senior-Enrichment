@@ -48,13 +48,17 @@ const Students = db.define('students', {
     },
     gpa: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: { min: 0.0, max: 4.0 }
     }
 })
 
 Students.belongsTo(Campuses)
-Campuses.hasMany(Students)
+Campuses.hasMany(Students, {
+    foreignKey: {
+        allowNull: true
+    }
+})
 
 module.exports = {
     db,
