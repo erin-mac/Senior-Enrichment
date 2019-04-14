@@ -3,62 +3,62 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import axios from 'axios'
 
+
 // Action Types 
-const SET_MANAGERS = 'SET_MANAGERS'
-const SET_PRODUCTS = 'SET_PRODUCTS'
+const SET_STUDENTS = 'SET_STUDENTS'
+const SET_CAMPUSES = 'SET_CAMPUSES'
 
 // Action Creators
-const setManagers = managers => ({
-    type: SET_MANAGERS,
-    managers
+const setStudents = students => ({
+    type: SET_STUDENTS,
+    students
 })
 
-const setProducts = products => ({
-    type: SET_PRODUCTS,
-    products
+const setCampuses = campuses => ({
+    type: SET_CAMPUSES,
+    campuses
 })
 
 // Thunk Creators
-export const fetchManagers = () => async dispatch => {
-    const response = await axios.get('/api/managers')
-    const managers = response.data
-    //console.log(managers)
-    dispatch(setManagers(managers))
+export const fetchStudents = () => async dispatch => {
+    try {
+        const response = await axios.get('api/students')
+        const students = response.data
+        return dispatch(setStudents(students))
+    } catch (error) { console.log(error) }
 }
 
-export const fetchProducts = () => async dispatch => {
-    const response = await axios.get('/api/products')
-    const products = response.data
-    //console.log(products)
-    dispatch(setProducts(products))
+export const fetchCampuses = () => async dispatch => {
+    try {
+        const response = await axios.get('api/campuses')
+        const campuses = response.data
+        return dispatch(setCampuses(campuses))
+    } catch (error) { console.log(error) }
 }
 
-export const checkManager = () => async dispatch => {
-    const response = await axios.get('/api/products')
-    const products = response.data
-    products.map(product => { if (product.managerId === null) { return false } })
-}
-
-export const updateManager = (newManager) => async dispatch => {
-    await axios.put('api/products/:id', newManager)
-    const response = await axios.get(manager, '/api/products')
-    const products = response.data
-    dispatch(setProducts(products))
+export const addCampus = (newCampus) => async dispatch => {
+    try {
+        console.log('hit route')
+        const response = await axios.put('api/campuses/addCampuses', newCampus)
+        console.log('Campus added')
+        //const newCampus = response.data
+        return dispatch(setCampuses(campuses))
+    } catch (error) { console.log(error) }
 }
 
 // Reducer
 const initialState = {
-    managers: {},
-    products: {}
+    students: [],
+    campuses: []
 }
 
 // :: (State, Action) -> State
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_MANAGERS:
-            return { ...state, managers: action.managers }
-        case SET_PRODUCTS:
-            return { ...state, products: action.products }
+        case SET_STUDENTS:
+            return { ...state, students: action.students }
+        case SET_CAMPUSES:
+            return { ...state, campuses: action.campuses }
         default:
             return state
     }

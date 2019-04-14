@@ -18,13 +18,6 @@ app.use(express.json());
 // 'API' routes
 app.use('/api', require('./api/routes'));
 
-// 404 middleware
-app.use((req, res, next) =>
-    path.extname(req.path).length > 0 ?
-        res.status(404).send('Not found') :
-        next()
-);
-
 // send index.html
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'))

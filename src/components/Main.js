@@ -1,48 +1,46 @@
 import React, { Component } from 'react'
-import { Route, HashRouter } from 'react-router-dom'
+import { HashRouter, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchManagers } from '../store'
-import { fetchProducts } from '../store'
-import { checkManager } from '../store'
+import { fetchStudents, fetchCampuses } from '../store'
+import Students from './Students'
+import Campuses from './Campuses'
 import Nav from './Nav'
-import Managers from './Managers'
-import ProductForm from './Products'
+import SingleCampus from './SingleCampus'
+import SingleStudent from './SingleStudent'
+import NewCampus from './NewCampus'
 class Main extends Component {
 
     componentDidMount() {
-        this.props.getManagers()
+        this.props.getCampuses()
             .catch(ex => console.log(ex))
-        this.props.getProducts()
+        this.props.getStudents()
             .catch(ex => console.log(ex))
     }
 
     render() {
+
         return (
-            <HashRouter>
-                <div>
-                    <h1> Acme Product Managers </h1>
+            <div>
+                <h3>Welcome!</h3>
+                <HashRouter>
+                    <Route path='/' component={Nav} />
+                    <Route exact path='/campuses' component={Campuses} />
+                    <Route exact path='/students' component={Students} />
+                    <Route exact path='/campuses/:id' component={SingleCampus} />
+                    <Route exact path='/students/:id' component={SingleStudent} />
+                    <Route exact path='/campuses/addCampus' component={NewCampus} />
+                </HashRouter>
+            </div>
 
-                    <Nav />
-                    <Route path="/managers" component={Managers} />
-                    <Route exact path="/products" component={ProductForm} />
-                    <Route exact path="/" render={() => <div>
-                        We {checkManager() ? " HAVE " : " DO NOT HAVE "}
-                        product manager positions open </div>} />
-
-
-
-                </div>
-            </HashRouter>
         )
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = () => dispatch => {
     return {
-        getManagers: () => dispatch(fetchManagers()),
-        getProducts: () => dispatch(fetchProducts())
+        getStudents: () => dispatch(fetchStudents()),
+        getCampuses: () => dispatch(fetchCampuses())
     }
 }
 
 export default connect(null, mapDispatchToProps)(Main)
-

@@ -1,16 +1,12 @@
-const { db, Manager, Product } = require('./db')
+const { db, Students, Campuses } = require('./db')
 const Sequelize = require('sequelize')
 
 const syncAndSeed = () => {
     return db.sync({ force: true })
         .then(() => {
             return Promise.all([
-                Manager.create({ name: 'Moe' }),
-                Manager.create({ name: 'Larry' }),
-                Manager.create({ name: 'Curly' }),
-                Product.create({ name: 'bar', managerId: 1 }),
-                Product.create({ name: 'bazz' }),
-                Product.create({ name: 'foo', managerId: 2 })
+                Campuses.create({ name: 'New York-flex', address: 'Hanover sq.', descript: 'part-time new york campus' }),
+                Students.create({ firstName: 'Erin', lastName: 'M.', email: 'ermcaweeney@gmail.com', gpa: 4.0, campusId: 1 })
             ]);
         });
 };
