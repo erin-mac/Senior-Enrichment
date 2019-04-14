@@ -59,6 +59,14 @@ export const deleteCampus = (campus, campuses) => async dispatch => {
     } catch (error) { console.log(error) }
 }
 
+export const deleteStudent = (student, students) => async dispatch => {
+    try {
+        const response = await axios.delete('api/students/deleteStudent', { data: student })
+        const filteredStudents = students.filter(students => students.id != student.id)
+        dispatch(setStudents(filteredStudents))
+    } catch (error) { console.log(error) }
+}
+
 // Reducer
 const initialState = {
     students: [],

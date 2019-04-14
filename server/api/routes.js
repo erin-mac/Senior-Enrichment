@@ -31,8 +31,18 @@ router.put('/campuses/addCampuses', async (req, res, next) => {
 
 router.delete('/campuses/deleteCampus', async (req, res, next) => {
     try {
-        console.log(req.body)
         const deleteCampus = await Campuses.destroy({
+            where: {
+                id: req.body.id
+            }
+        })
+        res.sendStatus(204)
+    } catch (error) { console.log(error) }
+})
+
+router.delete('/students/deleteStudent', async (req, res, next) => {
+    try {
+        const deleteStudent = await Students.destroy({
             where: {
                 id: req.body.id
             }
