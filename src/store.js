@@ -46,7 +46,16 @@ export const addCampus = (newCampus) => async dispatch => {
 export const addStudent = (newStudent) => async dispatch => {
     try {
         const response = await axios.put('api/students/addStudents', newStudent)
-        return dispatch(setStudents(students))
+        //return dispatch(setStudents(students))
+    } catch (error) { console.log(error) }
+}
+
+export const deleteCampus = (campus, campuses) => async dispatch => {
+    try {
+        //console.log(campuses)
+        const response = await axios.delete('api/campuses/deleteCampus', { data: campus })
+        const filteredCampuses = campuses.filter(campuses => campuses.id != campus.id)
+        dispatch(setCampuses(filteredCampuses))
     } catch (error) { console.log(error) }
 }
 
