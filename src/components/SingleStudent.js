@@ -24,12 +24,11 @@ const SingleStudent = (props) => {
 
     return (
         <div>
-            <h3>{lastName} , {firstName}</h3>
+            <h3>{lastName}, {firstName}</h3>
             <img src={imageUrl}></img>
             <ul>EMAIL: {email}</ul>
             <ul>GPA: {gpa}</ul>
             <ul>CAMPUS: <Link to={studentCampus ? `/campuses/${studentCampus.id}` : ''}> {studentCampus.name} </Link></ul>
-
         </div>
     )
 }

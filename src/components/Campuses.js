@@ -10,6 +10,7 @@ const Campuses = (props) => {
         props.deleteCampus(campus, props.campuses)
     }
 
+
     return (
         <div>
             <h3>Campuses</h3>
@@ -19,9 +20,10 @@ const Campuses = (props) => {
                         <div key={campus.id}>
                             <li key={campus.id}>
                                 <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
-                                <img src={campus.imageUrl}></img>
+                                <br></br>
+                                <img src={campus.imageUrl} alt="shit business people"></img>
                             </li>
-                            <button type='button' onClick={() => onClick(campus)}>Delete Campus</button>
+                            <button type='button' className="btn btn-danger" onClick={() => onClick(campus)}>Delete Campus</button>
                         </div>
                     )
                 })
@@ -31,7 +33,9 @@ const Campuses = (props) => {
 }
 
 const mapStateToProps = state => {
-    return { campuses: state.campuses }
+    return {
+        campuses: state.campuses
+    }
 }
 
 const mapDispatchToProps = dispatch => {

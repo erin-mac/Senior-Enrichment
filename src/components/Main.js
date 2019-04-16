@@ -23,8 +23,12 @@ class Main extends Component {
 
         return (
             <div>
-                <h3>Welcome!</h3>
+                <Link to='/' style={{ textDecoration: 'none' }}>
+                    <h3>Student Campus Directory</h3>
+
+                </Link>
                 <Nav />
+                <Route exact path='/' render={() => <h5>Welcome!</h5>} />
                 <HashRouter>
                     <Switch>
                         <Route exact path='/campuses' component={Campuses} />

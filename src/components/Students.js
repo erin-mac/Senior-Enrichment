@@ -20,7 +20,7 @@ const Students = (props) => {
                             <Link to={`/students/${student.id}`}>
                                 {student.lastName}, {student.firstName}
                             </Link>
-                            <button type='button' onClick={() => { onClick(student) }}>X</button>
+                            <button type='button' className="btn btn-danger btn-sm" onClick={() => { onClick(student) }}>X</button>
                         </li>)
                 }
                 ) : null}

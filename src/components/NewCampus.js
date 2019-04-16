@@ -22,36 +22,39 @@ const NewCampus = (props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label>
-                    Name:
+        <div>
+            <h4>Enter new campus information below:</h4>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label>
+                        Name:
     <input type="text" name="name" onChange={handleChange} />
-                </label>
-            </div>
-            <div className="form-group">
-                <label>
-                    Address:
+                    </label>
+                </div>
+                <div className="form-group">
+                    <label>
+                        Address:
     <input type="text" name="address" onChange={handleChange} />
-                </label>
-            </div>
+                    </label>
+                </div>
 
-            <div className="form-group">
-                <label>
-                    Image:
+                <div className="form-group">
+                    <label>
+                        Image:
     <input type="text" name="imageUrl" onChange={handleChange} />
-                </label>
-            </div>
+                    </label>
+                </div>
 
-            <div className="form-group">
-                <label>
-                    Description:
+                <div className="form-group">
+                    <label>
+                        Description:
       <input type='text' name="description" onChange={handleChange} />
-                </label>
-            </div>
-            <input type="submit" value="Submit" />
+                    </label>
+                </div>
 
-        </form>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
     )
 }
 
@@ -60,5 +63,6 @@ const mapDispatchToProps = (dispatch) => {
         addCampus: (campus) => dispatch(addCampus(campus))
     }
 }
+
 
 export default connect(null, mapDispatchToProps)(NewCampus)

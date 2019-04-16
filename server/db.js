@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const faker = require('faker')
 const db = new Sequelize(
     process.env.DATABASE_URL ||
     'postgres://localhost:5432/senior-enrich', {
@@ -44,11 +45,11 @@ const Students = db.define('students', {
     },
     imageUrl: {
         type: Sequelize.STRING,
-        defaultValue: ''
+        defaultValue: faker.image.people()
     },
     gpa: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
+        type: Sequelize.FLOAT,
+        defaultValue: (Math.random() * (4)).toFixed(2),
         validate: { min: 0.0, max: 4.0 }
     }
 })
