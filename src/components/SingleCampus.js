@@ -16,7 +16,7 @@ const SingleCampus = (props) => {
     return (
         <div>
             <h3>{name}</h3>
-            <img src={imageUrl} alt="shitty business people"></img>
+            <img src={imageUrl}></img>
             <p><strong>Address:</strong> {address}</p>
             <h4>About the Campus:</h4>
             <p>{description}</p>
