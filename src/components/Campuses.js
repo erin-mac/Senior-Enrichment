@@ -21,7 +21,7 @@ const Campuses = (props) => {
                             <li key={campus.id}>
                                 <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
                                 <br></br>
-                                <img src={campus.imageUrl} alt="shit business people"></img>
+                                <img src={campus.imageUrl}></img>
                             </li>
                             <button type='button' className="btn btn-danger" onClick={() => onClick(campus)}>Delete Campus</button>
                         </div>
